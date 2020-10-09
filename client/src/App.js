@@ -1,24 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {Router} from "@reach/router"
+import Main from "./pages/Main"
+import ReservationDetail from "./components/ReservationDetail"
+import ReservationList from "./components/ReservationList"
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Router>
+        <Main path="/reservations" default/>
+        <ReservationDetail path="/reservation/:id"/>
+        <ReservationList path="reservations"/>
+      </Router>
     </div>
   );
 }
