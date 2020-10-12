@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 
 const Form = (props) => {
-    const { initialTool, initialCustomer, initialDate,initialEmail,initialPhone,errs, onSubmitProp } = props;
+    const { initialTool, initialCustomer, initialDate,initialEmail,initialPhone,errs, onSubmitProp, emailStatus } = props;
     const [tool, setTool] = useState(initialTool)
     const [customer, setCustomer] = useState(initialCustomer)
     const [date, setDate] = useState(initialDate)
@@ -12,10 +12,11 @@ const Form = (props) => {
         e.preventDefault();
         onSubmitProp({tool, customer, date, email, phone});
     }
+
     
     return(
         <div className="container">
-        <form onSubmit={onSubmitHandler}>
+        <form>
             <div className="form-group">
                 <label>Tool</label>
                 <input className="form-control form-control-sm w-50" type="text" name="tool" value={tool} onChange={(e) => setTool(e.target.value)}/>
@@ -41,7 +42,8 @@ const Form = (props) => {
                 <input className="form-control form-control-sm w-50" type="phone" name="phone" value={phone} onChange={(e) => setPhone(e.target.value)}/>
                 {errs.phone ? <p className="text-danger small">{errs.phone.message}</p>: null}
             </div>
-            <input className="btn btn-primary btn-lg" type="submit"/>
+            <input className="btn btn-primary btn-lg" onClick={onSubmitHandler} type="submit"/>
+            {emailStatus ? <p className="text-danger small">There is an issue on email</p>: null}
         </form>
         </div>
     )

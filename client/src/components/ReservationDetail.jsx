@@ -13,6 +13,8 @@ const ReservationEdit = (props) => {
     const [phone, setPhone] = useState("")
     const [errs, setErrs] = useState("");
     const [loaded, setLoaded] = useState(false);
+    const [emailStatus, setEmailStatus]= useState("");
+    const [friendEmail, setFriendEmail] = useState("");
 
     useEffect(() => {
         axios.get(`http://localhost:8000/api/reservation/${props.id}`)
@@ -45,6 +47,35 @@ const ReservationEdit = (props) => {
             })
         .catch(err => console.log(err))
     }
+    const sendMailToOther = () => {
+        console.log('parameters:', tool,date,friendEmail)
+        const message = `Your friend send you reservation is approved for ${tool} on ${date}`
+        fetch('http://localhost:8000/send', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                to: friendEmail,
+                text: message
+            })
+          })
+          .then((res) => res.json())
+          .then((res) => {
+              if(res.code =="fail"){
+                setEmailStatus(true);
+                
+              }else{
+                  setEmailStatus(false);
+                  setFriendEmail("")
+              }
+            console.log('here is the response: ', res);
+          })
+          .catch((err) => {
+            console.error('here is the error: ', err);
+          })
+    }
     
     return(
         <>
@@ -53,12 +84,20 @@ const ReservationEdit = (props) => {
         <div className="row">
             <div className="col-6">
             {loaded && (
-            <Form initialTool={tool} initialCustomer={customer} initialDate={date} initialEmail={email} initialPhone={phone}  onSubmitProp={onUpdate} errs={errs} />
+            <Form initialTool={tool} initialCustomer={customer} initialDate={date} initialEmail={email} initialPhone={phone}  onSubmitProp={onUpdate} errs={errs}  emailStatus={emailStatus}/>
             )}
             </div>
             <div className="col-6">
             <MyFancyComponent/>
             </div>
+        </div>
+        <div className="container-fluid mt-5">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Recipient's email" aria-label="Recipient's username" aria-describedby="basic-addon2" type="text" name="friendEmail" value={friendEmail} onChange={(e) => setFriendEmail(e.target.value)}/>
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" props={props} onClick={sendMailToOther} type="button">Share with your Friend</button>
+            </div>
+        </div>
         </div>
         </div>
         </>
