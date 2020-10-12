@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import {navigate} from "@reach/router"
 import Form from './Form'
+import moment from 'moment'
+import MyFancyComponent from './Map'
 
 const ReservationEdit = (props) => {
     const [tool, setTool] = useState("")
@@ -17,7 +19,7 @@ const ReservationEdit = (props) => {
         .then(res =>{
             setTool(res.data.tool);
             setCustomer(res.data.customer);
-            setDate(res.data.date);
+            setDate(moment(res.data.date).format('YYYY-MM-DD'));
             setEmail(res.data.email);
             setPhone(res.data.phone);
             setLoaded(true);
@@ -38,7 +40,7 @@ const ReservationEdit = (props) => {
                 if(res.data.error){
                     setErrs(res.data.error.errors);
                 }else{
-                    navigate(`/reservation/${props.id}`)
+                    navigate(`/reservation/update/${props.id}`)
                 }
             })
         .catch(err => console.log(err))
@@ -48,9 +50,16 @@ const ReservationEdit = (props) => {
         <>
         <div className="container">
         <h2>Update Reservation</h2>
-        {loaded && (
-        <Form initialTool={tool} initialCustomer={customer} initialDate={date} initialEmail={email} initialPhone={phone}  onSubmitProp={onUpdate} errs={errs} />
-        )}
+        <div className="row">
+            <div className="col-6">
+            {loaded && (
+            <Form initialTool={tool} initialCustomer={customer} initialDate={date} initialEmail={email} initialPhone={phone}  onSubmitProp={onUpdate} errs={errs} />
+            )}
+            </div>
+            <div className="col-6">
+            <MyFancyComponent/>
+            </div>
+        </div>
         </div>
         </>
     )

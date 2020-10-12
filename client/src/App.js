@@ -9,9 +9,9 @@ function App() {
   return (
     <div>
       <Router>
-        <Main path="/reservations" default/>
-        <ReservationDetail path="/reservation/:id"/>
-        <ReservationList path="reservations"/>
+        <Main path="/reservation/new" default/>
+        <ReservationDetail path="/reservation/update/:id"/>
+        <ReservationList path="/reservations"/>
       </Router>
     </div>
   );

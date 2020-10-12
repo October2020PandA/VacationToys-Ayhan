@@ -1,5 +1,4 @@
 import React from 'react'
-import ReservationDetail from '../components/ReservationDetail'
 import ReservationForm from '../components/ReservationForm'
 
 

@@ -23,7 +23,7 @@ const ReservationForm = () => {
             if(res.data.error){
                 setErrs(res.data.error.errors);
             }else{
-                navigate(`/reservation/${res.data._id}`)
+                navigate(`/reservation/update/${res.data._id}`)
             }
         })
         .catch(err => console.log(err))

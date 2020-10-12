@@ -1,4 +1,3 @@
-const reservationController = require("../controllers/reservation.controller");
 const ReservationController = require("../controllers/reservation.controller");
 
 module.exports = app => {

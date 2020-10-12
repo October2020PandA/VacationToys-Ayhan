@@ -28,7 +28,7 @@ const Form = (props) => {
             </div>
             <div className="form-group">
                 <label>Date</label>
-                <input className="form-control form-control-sm w-50" type="date" name="date" value={date} onChange={(e) => setDate(e.target.value)}/>
+                <input className="form-control form-control-sm w-50" placeholder='MM/DD/YYYY' type="date" name="date" value={date} onChange={(e) => setDate(e.target.value)}/>
                 {errs.date ? <p className="text-danger small">{errs.date.message}</p>: null}
             </div>
             <div className="form-group">
