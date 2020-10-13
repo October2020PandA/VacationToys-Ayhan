@@ -29,7 +29,7 @@ const ReservationEdit = (props) => {
         .catch(err =>  console.log(err))
     },[])
 
-    const onUpdate = ({tool,customer,date,email,phone}) =>{
+    const onUpdate = () =>{
         axios.put(`http://localhost:8000/api/reservation/update/${props.id}`, {
             tool,
             customer,

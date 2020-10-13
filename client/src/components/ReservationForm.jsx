@@ -64,7 +64,14 @@ const ReservationForm = () => {
             <>
             <div className="container">
             <h2>Add New Reservation</h2>
-            <Form initialTool={tool} initialCustomer={customer} initialDate={date} initialEmail={email} initialPhone={phone} onSubmitProp={onSubmit} onClickProp={sendMail} errs={errs} emailStatus={emailStatus} />
+            <div className="row">
+                <div className="col-6">
+                    <Form initialTool={tool} initialCustomer={customer} initialDate={date} initialEmail={email} initialPhone={phone} onSubmitProp={onSubmit} onClickProp={sendMail} errs={errs} emailStatus={emailStatus} />
+                </div>
+                <div className="col-6">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Kayak_Tandem.jpg" className="img-fluid" alt="kayak"/>
+                </div>
+                </div>
             </div>
         </>
     )
